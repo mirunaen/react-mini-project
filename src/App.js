@@ -7,6 +7,20 @@ const BASE_URL = 'https://api.exchangeratesapi.io/latest';
 function App() {
   //equal to empty string cause we got any options yet
   const [currencyOptions, setCurrencyOptions] = useState([]);
+  const [fromCurrency, setFromCurrency] = useState();
+  const [toCurrency, setToCurrency] = useState();
+  const [exchangeRate, setExchangeRate] = useState();
+  const [amount, setAmount] = useState(1);
+  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+
+  let toAmount, fromAmount
+  if (amountInFromCurrency) {
+    fromAmount = amount
+    toAmount = amount * exchangeRate
+  } else {
+    toAmount = amount
+    fromAmount = amount / exchangeRate
+  }
   useEffect(() => {
     fetch(BASE_URL)
       //when we get the fetch back we convert the response
@@ -14,22 +28,51 @@ function App() {
       .then(res => res.json())
       //which returns another promise that has our data
       .then(data => {
-        //to get the data and get the key portion of the rates
-        //...to D structure the array
+        const firstCurrency = Object.keys(data.rates)[0];
         setCurrencyOptions([data.base, ...Object.keys(data.rates)])
+        setFromCurrency(data.base)
+        setToCurrency(firstCurrency)
+        setExchangeRate(firstCurrency)
       })
   }, [])
-  //with this empty array we will call useEffect just once
-  //because the empty array never changes
-  //we want to run the useEffect just once
+
+  useEffect(() => {
+    if (fromCurrency != null && toCurrency != null) {
+      fetch(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
+        .then(res => res.json())
+        .then(data => setExchangeRate(data.rates[toCurrency]))
+    }
+  }, [fromCurrency, toCurrency])
+
+  function handleFromAmountChange(e) {
+    setAmount(e.target.value)
+    setAmountInFromCurrency(true)
+  }
+
+  function handleToAmountChange(e) {
+    setAmount(e.target.value)
+    setAmountInFromCurrency(false)
+  }
   return (
     <>
       <h1>Convert</h1>
-      <CurrencyRow currencyOptions={currencyOptions} />
-      <div classNme="equal">
+      <CurrencyRow
+        currencyOptions={currencyOptions}
+        selectedCurrency={fromCurrency}
+        onChangeCurrency={e => setFromCurrency(e.target.value)}
+        amount={fromAmount}
+        onChangeAmount={handleFromAmountChange}
+      />
+      <div className="equal">
         =
       </div>
-      <CurrencyRow currencyOptions={currencyOptions} />
+      <CurrencyRow
+        currencyOptions={currencyOptions}
+        selectedCurrency={toCurrency}
+        onChangeCurrency={e => setToCurrency(e.target.value)}
+        amount={toAmount}
+        onChangeAmount={handleToAmountChange}
+      />
     </>
   );
 }
