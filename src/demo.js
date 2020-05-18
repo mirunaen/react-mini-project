@@ -16,6 +16,6 @@ const personTwo = {
     }
 }
 
-const { name, age } = personOne;
-console.log(name);
+const { name: firstName, age } = personOne;
+console.log(firstName);
 console.log(age);
