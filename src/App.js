@@ -15,7 +15,7 @@ function App() {
       //which returns another promise that has our data
       .then(data => {
         //to get the data and get the key portion of the rates
-        //...to destructure the array
+        //...to D structure the array
         setCurrencyOptions([data.base, ...Object.keys(data.rates)])
       })
   }, [])
