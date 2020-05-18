@@ -8,11 +8,14 @@ const personOne = {
     }
 }
 
-const personTwo = {
-    age: 23,
+//function printUser(user) {
+//    console.log(`Name is ${user.name} and age is ${user.age}`)
+// }
+
+//printUser(personOne);
+//all we want is the name and age of personOne
+function printUser({ name, age }) {
+    console.log(`Name is ${user.name} and age is ${user.age}`)
 }
-//put it together and over writte what was in personOne
-const personThreee = { ...personOne, ...personTwo }
-console.log(firstName);
-console.log(age);
-console.log(city);
+
+printUser(personOne);
