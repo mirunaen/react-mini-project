@@ -1,6 +1,7 @@
 const personOne = {
     name: 'Kyle',
     age: 24,
+    favoriteFood: 'salad',
     address: {
         city: 'Somewhere',
         state: 'One of them'
@@ -16,6 +17,7 @@ const personTwo = {
     }
 }
 
-const { name: firstName, age } = personOne;
+const { name: firstName = 'John', age, favoriteFood = 'Rice' } = personOne;
 console.log(firstName);
 console.log(age);
+console.log(favoriteFood);
