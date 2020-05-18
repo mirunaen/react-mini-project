@@ -5,20 +5,24 @@ import CurrencyRow from "./CurrencyRow";
 const BASE_URL = 'https://api.exchangeratesapi.io/latest';
 
 function App() {
-}, [])
-//with this empty array we will call useEffect just once
-//because the empty array never changes
-//we want to run the useEffect just once
-return (
-  <>
-    <h1>Convert</h1>
-    <CurrencyRow />
-    <div classNme="equal">
-      =
+  useEffect(() => {
+    fetch(BASE_URL)
+      .then(res => res.json())
+      .then(data => console.log(data))
+  }, [])
+  //with this empty array we will call useEffect just once
+  //because the empty array never changes
+  //we want to run the useEffect just once
+  return (
+    <>
+      <h1>Convert</h1>
+      <CurrencyRow />
+      <div classNme="equal">
+        =
       </div>
-    <CurrencyRow />
-  </>
-);
+      <CurrencyRow />
+    </>
+  );
 }
 
 export default App;
