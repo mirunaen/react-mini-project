@@ -9,6 +9,10 @@ function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [fromCurrency, setFromCurrency] = useState();
   const [toCurrency, setToCurrency] = useState();
+  const [exchangeRate, setExchangeRate] = useState();
+  const [amount, setAmount] = useState(1);
+  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+  console.log(exchangeRate);
   useEffect(() => {
     fetch(BASE_URL)
       //when we get the fetch back we convert the response
@@ -20,6 +24,7 @@ function App() {
         setCurrencyOptions([data.base, ...Object.keys(data.rates)])
         setFromCurrency(data.base)
         setToCurrency(firstCurrency)
+        setExchangeRate(firstCurrency)
       })
   }, [])
   //with this empty array we will call useEffect just once
