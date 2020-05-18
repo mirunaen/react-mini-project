@@ -9,15 +9,10 @@ const personOne = {
 }
 
 const personTwo = {
-    name: 'Sally',
     age: 23,
-    address: {
-        city: 'Somewhere',
-        state: 'One of them'
-    }
 }
-
-const { name: firstName = 'John', address: { city } } = personOne;
+//put it together and over writte what was in personOne
+const personThreee = { ...personOne, ...personTwo }
 console.log(firstName);
 console.log(age);
 console.log(city);
