@@ -1,4 +1,3 @@
-This project was bootstrapped with
 
 ## Available Scripts
 
