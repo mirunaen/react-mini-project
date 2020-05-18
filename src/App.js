@@ -25,11 +25,11 @@ function App() {
   return (
     <>
       <h1>Convert</h1>
-      <CurrencyRow />
+      <CurrencyRow currencyOptions={currencyOptions} />
       <div classNme="equal">
         =
       </div>
-      <CurrencyRow />
+      <CurrencyRow currencyOptions={currencyOptions} />
     </>
   );
 }
