@@ -17,7 +17,7 @@ const personTwo = {
     }
 }
 
-const { name: firstName = 'John', age, favoriteFood = 'Rice' } = personOne;
+const { name: firstName = 'John', ...rest } = personOne;
 console.log(firstName);
 console.log(age);
-console.log(favoriteFood);
+console.log(rest);
