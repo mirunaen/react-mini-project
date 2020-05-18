@@ -14,8 +14,9 @@ const personOne = {
 
 //printUser(personOne);
 //all we want is the name and age of personOne
-function printUser({ name, age }) {
-    console.log(`Name is ${user.name} and age is ${user.age}`)
+function printUser({ name, age, favoriteFood = 'Whatever' }) {
+    console.log(`Name is ${name} and age is ${age} and
+    favorite food is ${favoriteFood} `)
 }
 
 printUser(personOne);
